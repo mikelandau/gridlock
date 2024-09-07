@@ -3,12 +3,6 @@ body {
     color: #eeeee4;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 h1 {
     font-size: 64px;
     text-align: center;
