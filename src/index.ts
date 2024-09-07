@@ -34,6 +34,11 @@ function drawGrid(ctx: CanvasRenderingContext2D) {
             ctx.fillRect(x, y, width / 28, height / 28);
         }
     }
+
+    const exitX = 13 * height / 14;
+    const exitY = 5 * height / 14;
+    ctx.fillStyle = '#303030';
+    ctx.fillRect(exitX, exitY, width / 14, height / 7);
 }
 
 function step(): void {
