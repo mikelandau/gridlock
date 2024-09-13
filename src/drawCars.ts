@@ -1,5 +1,7 @@
 import drawCar from './drawCar';
+import getOriginForSpace from './getOriginForSpace';
 import Car from './types/car';
+import Coordinates from './types/coordinates';
 
 const primaryCarColor = '#ff0000';
 
@@ -16,10 +18,15 @@ const carColors = [
     '#FFD09E'
 ];
 
-function drawCars(ctx: CanvasRenderingContext2D, cars: Car[]): void {
+function drawCars(ctx: CanvasRenderingContext2D, cars: Car[], heldCarIndex: number, heldCarPosition: Coordinates): void {
     cars.forEach((car, i) => {
         const color = i === 0 ? primaryCarColor : carColors[i];
-        drawCar(ctx, car, color);
+        if (i === heldCarIndex) {
+            drawCar(ctx, car, color, heldCarPosition);
+        }
+        else {
+            drawCar(ctx, car, color, getOriginForSpace(ctx, car.x, car.y));
+        }
     })
 }
 

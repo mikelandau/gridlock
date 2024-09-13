@@ -1,11 +1,10 @@
 import getOriginForSpace from './getOriginForSpace';
 import Car from './types/car';
+import Coordinates from './types/coordinates';
 
-function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string) {
+function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string, position: Coordinates) {
     const width = ctx.canvas.width;
     const height = ctx.canvas.height;
-
-    const origin = getOriginForSpace(ctx, car.x, car.y);
 
     const spaceWidth = width / 7;
     const spaceHeight = height / 7;
@@ -21,7 +20,7 @@ function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string) {
     }
 
     ctx.fillStyle = color;
-    ctx.fillRect(origin.x, origin.y, carWidth, carHeight);
+    ctx.fillRect(position.x, position.y, carWidth, carHeight);
 }
 
 export default drawCar;
