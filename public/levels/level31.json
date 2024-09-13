@@ -1,0 +1,70 @@
+{
+    "cars": [
+        {
+            "orientation": "h",
+            "size": 2,
+            "x": 1,
+            "y": 2
+        },
+        {
+            "orientation": "h",
+            "size": 2,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "orientation": "h",
+            "size": 3,
+            "x": 3,
+            "y": 0
+        },
+        {
+            "orientation": "h",
+            "size": 2,
+            "x": 4,
+            "y": 1
+        },
+        {
+            "orientation": "h",
+            "size": 2,
+            "x": 3,
+            "y": 3
+        },
+        {
+            "orientation": "h",
+            "size": 2,
+            "x": 0,
+            "y": 4
+        },
+        {
+            "orientation": "h",
+            "size": 3,
+            "x": 3,
+            "y": 5
+        },
+        {
+            "orientation": "v",
+            "size": 2,
+            "x": 3,
+            "y": 1
+        },
+        {
+            "orientation": "v",
+            "size": 2,
+            "x": 0,
+            "y": 2
+        },
+        {
+            "orientation": "v",
+            "size": 3,
+            "x": 5,
+            "y": 2
+        },
+        {
+            "orientation": "v",
+            "size": 3,
+            "x": 2,
+            "y": 3
+        }
+    ]
+}

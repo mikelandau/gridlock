@@ -5,7 +5,6 @@ import drawGrid from './drawGrid';
 import getCarAtMouseCoordinates from './getCarAtMouseCoordinates';
 import getDragBoundaries from './getDragBoundaries';
 import getNearestSpaceForCoordinates from './getNearestSpaceForCoordinates';
-import getOriginForSpace from './getOriginForSpace';
 import getTargetHeldCarPosition from './getTargetHeldCarPosition';
 import Car from './types/car';
 import Coordinates from './types/coordinates';
@@ -27,8 +26,33 @@ let holdOriginalCanvasMouseY = 0;
 
 let dragBoundaries: DragBoundaries;
 
+let currentLevel = 0;
+
 async function init(): Promise<void> {
-    cars = await carsfromLevelFile('levels/level01.json');
+    await resetGame();
+}
+
+async function resetGame(): Promise<void> {
+    let levelFile: string;
+    switch(currentLevel) {
+        case 0:
+            levelFile = 'levels/level01.json';
+            break;
+        case 1:
+            levelFile = 'levels/level11.json';
+            break;
+        case 2:
+            levelFile = 'levels/level21.json';
+            break;
+        case 3:
+            levelFile = 'levels/level31.json';
+            break;
+        default:
+            levelFile = 'levels/level31.json';
+    }
+    cars = await carsfromLevelFile(levelFile);
+    holdingCar = false;
+    heldCarIndex = -1;
 }
 
 function getCanvasMousePosition(): Coordinates {
@@ -44,6 +68,15 @@ async function carsfromLevelFile(path: string): Promise<Car[]> {
     const levelJson = await levelResponse.json();
     const cars = levelJson.cars as Car[];
     return cars;
+}
+
+function isLevelCompleted(ctx: CanvasRenderingContext2D, heldCar: Car, heldCarPosition: Coordinates) {
+    const width = ctx.canvas.width;
+    const spaceWidth = (width / 7);
+    const carRightX = heldCarPosition.x + (spaceWidth * heldCar.size);
+
+    const levelCompleted = carRightX > width;
+    return levelCompleted;
 }
 
 function step(): void {
@@ -71,6 +104,17 @@ function step(): void {
 
     const heldCarPosition = getHeldCarPosition(ctx, cars[heldCarIndex], canvasMouseX, canvasMouseY, holdOriginalCanvasMouseX, holdOriginalCanvasMouseY);
 
+    if (heldCarIndex === 0 && isLevelCompleted(ctx, cars[heldCarIndex], heldCarPosition)) {
+        if (currentLevel === 3) {
+            alert('You\'re purdy smart there einstein');
+        }
+        currentLevel = Math.min(3, currentLevel + 1);
+        resetGame().then(() => {
+            window.requestAnimationFrame(step);
+        })
+        return;
+    }
+
     clearScreen(ctx);
 
     drawBorder(ctx);
@@ -88,7 +132,6 @@ function getHeldCarPosition(ctx: CanvasRenderingContext2D, heldCar: Car, canvasM
     if (holdingCar && heldCarIndex >= 0) {
         const targetHeldCarPosition = getTargetHeldCarPosition(ctx, heldCar, canvasMouseX, canvasMouseY, holdOriginalCanvasMouseX, holdOriginalCanvasMouseY);
 
-        //console.log(`minX=${dragBoundaries.minX} minY=${dragBoundaries.minY} maxX=${dragBoundaries.maxX} maxY=${dragBoundaries.maxY} canvasMouseX=${canvasMouseX} canvasMouseY=${canvasMouseY}`);
         heldCarPosition.x = Math.max(dragBoundaries.minX, Math.min(dragBoundaries.maxX, targetHeldCarPosition.x));
         heldCarPosition.y = Math.max(dragBoundaries.minY, Math.min(dragBoundaries.maxY, targetHeldCarPosition.y));
     }
