@@ -14,6 +14,11 @@ function getDragBoundaries(ctx: CanvasRenderingContext2D, heldCar: Car, cars: Ca
             maxSpaceX += 1;
         }
 
+        if (heldCar.y === 2 && maxSpaceX === 6 - heldCar.size) {
+            // exit
+            maxSpaceX = 6;
+        }
+
         const minCoords = getOriginForSpace(ctx, minSpaceX, heldCar.y);
         const maxCoords = getOriginForSpace(ctx, maxSpaceX, heldCar.y);
 
