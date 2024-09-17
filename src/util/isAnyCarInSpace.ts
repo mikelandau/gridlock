@@ -1,4 +1,4 @@
-import Car from './types/car';
+import Car from '@interfaces/car';
 
 function isAnyCarInSpace(spaceX: number, spaceY: number, cars: Car[]) {
     for (const car of cars) {

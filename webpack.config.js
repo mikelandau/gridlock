@@ -2,7 +2,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/gridlock.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -14,6 +14,12 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      '@draw':       path.resolve(__dirname, "src/draw"),
+      '@interfaces': path.resolve(__dirname, "src/interfaces"),
+      '@update':     path.resolve(__dirname, "src/update"),
+      '@util':       path.resolve(__dirname, "src/util"),
+    },
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {

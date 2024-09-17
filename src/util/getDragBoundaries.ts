@@ -1,8 +1,12 @@
+import DragBoundaries from '@interfaces/dragBoundaries';
+import GameState from '@interfaces/gameState';
+
 import getOriginForSpace from './getOriginForSpace';
 import isAnyCarInSpace from './isAnyCarInSpace';
-import Car from './types/car';
 
-function getDragBoundaries(ctx: CanvasRenderingContext2D, heldCar: Car, cars: Car[]) {
+function getDragBoundaries(ctx: CanvasRenderingContext2D, game: GameState) {
+    const heldCar = game.cars[game.heldCarIndex]
+    const cars = game.cars;
     if (heldCar.orientation === 'h') {
         let minSpaceX = heldCar.x;
         while (minSpaceX > 0 && !isAnyCarInSpace(minSpaceX - 1, heldCar.y, cars)) {

@@ -1,7 +1,8 @@
+import GameState from '@interfaces/gameState';
+
+import getOriginForSpace from '@util/getOriginForSpace';
+
 import drawCar from './drawCar';
-import getOriginForSpace from './getOriginForSpace';
-import Car from './types/car';
-import Coordinates from './types/coordinates';
 
 const primaryCarColor = '#ff0000';
 
@@ -18,11 +19,11 @@ const carColors = [
     '#FFD09E'
 ];
 
-function drawCars(ctx: CanvasRenderingContext2D, cars: Car[], heldCarIndex: number, heldCarPosition: Coordinates): void {
-    cars.forEach((car, i) => {
+function drawCars(ctx: CanvasRenderingContext2D, game: GameState): void {
+    game.cars.forEach((car, i) => {
         const color = i === 0 ? primaryCarColor : carColors[i];
-        if (i === heldCarIndex) {
-            drawCar(ctx, car, color, heldCarPosition);
+        if (i === game.heldCarIndex) {
+            drawCar(ctx, car, color, game.heldCarPosition);
         }
         else {
             drawCar(ctx, car, color, getOriginForSpace(ctx, car.x, car.y));

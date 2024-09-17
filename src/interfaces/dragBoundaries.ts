@@ -4,3 +4,5 @@ interface DragBoundaries {
     minX: number,
     minY: number
 }
+
+export default DragBoundaries;

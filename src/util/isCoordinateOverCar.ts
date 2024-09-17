@@ -1,6 +1,7 @@
+import Car from '@interfaces/car';
+import Coordinates from '@interfaces/coordinates';
+
 import getOriginForSpace from './getOriginForSpace';
-import Car from './types/car';
-import Coordinates from './types/coordinates';
 
 function isCoordinateOverCar(ctx: CanvasRenderingContext2D, car: Car, canvasMouseCoords: Coordinates): boolean {
     const { x: canvasMouseX, y: canvasMouseY } = canvasMouseCoords;

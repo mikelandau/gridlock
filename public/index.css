@@ -15,9 +15,13 @@ h1 {
     align-items: center;
 }
 
+.canvasBox canvas {
+    max-width: 100%;
+}
+
 .dosis-300 {
     font-family: "Dosis", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-  }
+}

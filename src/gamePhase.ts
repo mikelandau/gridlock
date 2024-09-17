@@ -1,0 +1,1 @@
+type GamePhase = 'settingUpLevel' | 'play' | 'tearingDownLevel';

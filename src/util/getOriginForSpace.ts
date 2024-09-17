@@ -1,4 +1,4 @@
-import Coordinates from './types/coordinates';
+import Coordinates from '@interfaces/coordinates';
 
 function getOriginForSpace(ctx: CanvasRenderingContext2D, spaceX: number, spaceY: number): Coordinates {
     const width = ctx.canvas.width;

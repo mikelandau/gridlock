@@ -1,6 +1,5 @@
-import getOriginForSpace from './getOriginForSpace';
-import Car from './types/car';
-import Coordinates from './types/coordinates';
+import Car from '@interfaces/car';
+import Coordinates from '@interfaces/coordinates';
 
 function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string, position: Coordinates) {
     const width = ctx.canvas.width;

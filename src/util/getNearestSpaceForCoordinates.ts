@@ -1,4 +1,4 @@
-import Coordinates from './types/coordinates';
+import Coordinates from '@interfaces/coordinates';
 
 function getNearestSpaceForCoordinates(ctx: CanvasRenderingContext2D, coordinates: Coordinates): Coordinates {
     const width = ctx.canvas.width;
