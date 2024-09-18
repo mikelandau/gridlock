@@ -3,6 +3,8 @@ interface Car {
     size: number,
     x: number,
     y: number,
+    animation: 'none' | 'incoming' | 'falling'
+    animationFrame: number
 };
 
 export default Car;

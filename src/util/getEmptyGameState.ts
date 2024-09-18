@@ -10,6 +10,7 @@ function getEmptyGameState() {
             minX: 0,
             minY: 0,
         },
+        gamePhase: 'settingUpLevel',
         heldCarIndex: -1,
         heldCarPosition: {
             x: 0,

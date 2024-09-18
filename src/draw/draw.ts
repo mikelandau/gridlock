@@ -7,9 +7,9 @@ import drawCars from './drawCars';
 
 function draw(ctx: CanvasRenderingContext2D, game: GameState) {
     clearScreen(ctx);
-    drawBorder(ctx);
     drawGrid(ctx);
     drawCars(ctx, game);
+    drawBorder(ctx);
 }
 
 export default draw;
