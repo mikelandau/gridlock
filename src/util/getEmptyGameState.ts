@@ -10,7 +10,7 @@ function getEmptyGameState() {
             minX: 0,
             minY: 0,
         },
-        gamePhase: 'settingUpLevel',
+        gamePhase: 'title',
         heldCarIndex: -1,
         heldCarPosition: {
             x: 0,
@@ -22,6 +22,8 @@ function getEmptyGameState() {
             y: 0
         },
         levelComplete: false,
+        playDropSound: false,
+        playPickupSound: false
     };
 
     return emptyState;

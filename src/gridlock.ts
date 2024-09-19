@@ -1,17 +1,28 @@
+import loadAudio from '@audio/loadAudio';
+
 import draw from '@draw/draw';
 
 import Coordinates from '@interfaces/coordinates';
 import GameState from '@interfaces/gameState';
 import InputState from '@interfaces/inputState';
+import AudioBuffers from '@interfaces/audioBuffers';
 
 import resetGame from '@update/resetGame';
 import update from '@update/update';
 
 import getEmptyInputState from '@util/getEmptyInputState';
 import getEmptyGameState from '@util/getEmptyGameState';
+import playSounds from '@audio/playSounds';
 
 const canvas = document.getElementById('gridlockCanvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+const audioContext = new AudioContext();
+const audioBuffers: AudioBuffers = {
+    drop: undefined,
+    pickup: undefined
+};
+
 
 let clientMouseX = 0;
 let clientMouseY = 0;
@@ -19,7 +30,11 @@ let clientMouseY = 0;
 const game: GameState = getEmptyGameState();
 const input: InputState = getEmptyInputState();
 
+
+
+
 async function init(): Promise<void> {
+    await loadAudio(audioContext, audioBuffers);
     await resetGame(game);
 }
 
@@ -44,6 +59,7 @@ function step(): void {
     }
 
     draw(ctx, game);
+    playSounds(audioContext, game, audioBuffers);
 
     window.requestAnimationFrame(step);
 }
@@ -78,6 +94,15 @@ canvas.addEventListener('touchstart', handleTouchStart);
 canvas.addEventListener('touchmove', handleTouchMove);
 canvas.addEventListener('touchend', handleTouchStop);
 canvas.addEventListener('touchcancel', handleTouchStop);
+
+function handleCanvasClick(e: MouseEvent) {
+    e.preventDefault();
+    if (game.gamePhase === 'title') {
+        game.gamePhase = 'settingUpLevel';
+    }
+}
+
+canvas.addEventListener('click', handleCanvasClick);
 
 init().then(() => {
     window.requestAnimationFrame(step);

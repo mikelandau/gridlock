@@ -1,17 +1,13 @@
 import GameState from '@interfaces/gameState';
 import InputState from '@interfaces/inputState';
 
+import areAllAnimationsFinished from '@util/areAllAnimationsFinished';
+
 import updateGrabState from './updateGrabState';
 import updateHeldCarPosition from './updateHeldCarPosition';
 import updateToTearDownPhaseIfLevelWon from './updateToTearDownPhaseIfLevelWon';
 import updateToPlayPhase from './updateToPlayPhase';
-import areAllAnimationsFinished from '@util/areAllAnimationsFinished';
-
-function animateCars(game: GameState) {
-    game.cars.forEach(car => ++car.animationFrame);
-}
-
-
+import animateCars from './animateCars';
 
 function update(ctx: CanvasRenderingContext2D, game: GameState, input: InputState) {
     if (game.gamePhase === 'settingUpLevel') {

@@ -13,6 +13,7 @@ function updateGrabState(ctx: CanvasRenderingContext2D, game: GameState, input: 
         game.holdOriginalCanvasMouse = { ...input.canvasMouse };
         if (game.heldCarIndex >= 0) {
             game.dragBoundaries = getDragBoundaries(ctx, game);
+            game.playPickupSound = true;
         }
     }
     else if (game.holdingCar && !input.mouseButtonPressed) {
@@ -21,6 +22,7 @@ function updateGrabState(ctx: CanvasRenderingContext2D, game: GameState, input: 
             const newSpaceCoords = getNearestSpaceForCoordinates(ctx, heldCarPosition);
             game.cars[game.heldCarIndex].x = newSpaceCoords.x;
             game.cars[game.heldCarIndex].y = newSpaceCoords.y;
+            game.playDropSound = true;
         }
         game.holdingCar = false;
         game.heldCarIndex = -1;

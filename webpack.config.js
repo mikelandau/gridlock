@@ -15,6 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '@audio':      path.resolve(__dirname, "src/audio"),
       '@draw':       path.resolve(__dirname, "src/draw"),
       '@interfaces': path.resolve(__dirname, "src/interfaces"),
       '@update':     path.resolve(__dirname, "src/update"),

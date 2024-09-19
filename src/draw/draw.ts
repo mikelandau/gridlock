@@ -4,12 +4,20 @@ import clearScreen from './clearScreen';
 import drawBorder from './drawBorder';
 import drawGrid from './drawGrid';
 import drawCars from './drawCars';
+import drawHeldCar from './drawHeldCar';
+import drawTitleScreenText from './drawTitleScreenText';
 
 function draw(ctx: CanvasRenderingContext2D, game: GameState) {
     clearScreen(ctx);
     drawGrid(ctx);
-    drawCars(ctx, game);
+    if (game.gamePhase !== 'title') {
+        drawCars(ctx, game);
+    }
     drawBorder(ctx);
+    drawHeldCar(ctx, game);
+    if (game.gamePhase === 'title') {
+        drawTitleScreenText(ctx);
+    }
 }
 
 export default draw;

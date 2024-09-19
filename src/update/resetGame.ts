@@ -24,7 +24,9 @@ async function resetGame(gameState: GameState): Promise<void> {
     gameState.holdingCar = false;
     gameState.heldCarIndex = -1;
     gameState.levelComplete = false;
-    gameState.gamePhase = 'settingUpLevel';
+    if (gameState.gamePhase !== 'title') {
+        gameState.gamePhase = 'settingUpLevel';
+    }
 
     gameState.cars.forEach((car, i) => {
         car.animationFrame = i * -10;

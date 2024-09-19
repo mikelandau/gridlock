@@ -2,7 +2,7 @@ import Car from './car';
 import Coordinates from './coordinates';
 import DragBoundaries from './dragBoundaries';
 
-type GamePhase = 'settingUpLevel' | 'play' | 'tearingDownLevel';
+type GamePhase = 'title' | 'settingUpLevel' | 'play' | 'tearingDownLevel';
 
 interface GameState {
     cars: Car[],
@@ -13,7 +13,9 @@ interface GameState {
     dragBoundaries: DragBoundaries,
     currentLevel: number,
     levelComplete: boolean,
-    gamePhase: GamePhase
+    gamePhase: GamePhase,
+    playPickupSound: boolean,
+    playDropSound: boolean
 }
 
 export default GameState;

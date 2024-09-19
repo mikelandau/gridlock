@@ -1,7 +1,7 @@
 import Car from '@interfaces/car';
 import Coordinates from '@interfaces/coordinates';
 
-function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string, position: Coordinates) {
+function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string, position: Coordinates, highlight: boolean) {
     const width = ctx.canvas.width;
     const height = ctx.canvas.height;
 
@@ -16,6 +16,13 @@ function drawCar(ctx: CanvasRenderingContext2D, car: Car, color: string, positio
     } else {
         carHeight = spaceHeight * car.size;
         carWidth = spaceWidth;
+    }
+
+    if (highlight) {
+        carWidth += 10;
+        carHeight += 10;
+        position.x -= 5;
+        position.y -= 5;
     }
 
     ctx.fillStyle = color;

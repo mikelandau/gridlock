@@ -3,31 +3,16 @@ import GameState from '@interfaces/gameState';
 import getOriginForSpace from '@util/getOriginForSpace';
 
 import drawCar from './drawCar';
+import carColors from './carColors';
+import primaryCarColor from './primaryCarColor';
 
-const primaryCarColor = '#ff0000';
 
-const carColors = [
-    '#FFEF9E',
-    '#D2FF9E',
-    '#9EFFA8',
-    '#9EFFE5',
-    '#9EDBFF',
-    '#9E9EFF',
-    '#DB9EFF',
-    '#FF9EE5',
-    '#FF9EA8',
-    '#FFD09E'
-];
 
 function drawCars(ctx: CanvasRenderingContext2D, game: GameState): void {
     game.cars.forEach((car, i) => {
         const color = i === 0 ? primaryCarColor : carColors[i];
         if (i === game.heldCarIndex) {
-            const carPosition = { ...game.heldCarPosition };
-            if (car.animation === 'falling') {
-                carPosition.x += car.animationFrame * 5;
-            }
-            drawCar(ctx, car, color, carPosition);
+            return;
         }
         else {
             const carPosition = getOriginForSpace(ctx, car.x, car.y);
@@ -41,9 +26,18 @@ function drawCars(ctx: CanvasRenderingContext2D, game: GameState): void {
                 const ratio = Math.max(0, Math.min(1, car.animationFrame / 30));
                 carPosition.y += (1/60) * Math.pow((ctx.canvas.height * ratio), 2);
             }
-            drawCar(ctx, car, color, carPosition);
+            drawCar(ctx, car, color, carPosition, false);
         }
-    })
+    });
+    if (game.heldCarIndex >= 0) {
+        const heldCar = game.cars[game.heldCarIndex];
+        const color = game.heldCarIndex === 0 ? primaryCarColor : carColors[game.heldCarIndex];
+        const carPosition = { ...game.heldCarPosition };
+            if (heldCar.animation === 'falling') {
+                carPosition.x += heldCar.animationFrame * 5;
+            }
+            drawCar(ctx, heldCar, color, carPosition, true);
+    }
 }
 
 export default drawCars;
